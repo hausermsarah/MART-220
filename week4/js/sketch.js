@@ -1,81 +1,76 @@
-var x = [];
-var movement = 10.0;
-var initialX = 100;
-// global variables
-var r;
-var g;
-var b;
-var myImages = [];
-var x = 100;
+var img1, img2, img3;
+var timer;
+var x1, y1, x2, y2, x3, y3;
+var imgSize = 100; 
+var catSize = 50; // Size of the cat image
 
-var img;
-function preload()
-{
-    img = loadImage("./assets/apple.jpg");
-    myImages[0] = img;
-    img = loadImage("./assets/cat.png");
-    myImages[1] = img;
-    img = loadImage("./assets/elephant.png");
-    myImages[2] = img;
-
-
-}
-function setup()
-{
-    createCanvas(displayWidth-25, displayHeight-140);
-   
-
-    // set the x values
-    for(var i = 0; i < 500; i++)
-    {
-        x[i] = initialX;
-        initialX += 10;
-    }
+function preload() {
+  img1 = loadImage("assets/apple.jpg");
+  img2 = loadImage("assets/cat.jpg");
+  img3 = loadImage("assets/elephant.jpg");
 }
 
-function draw()
-{
-    background(120);
-    
-   // translate
-   translate(width/2-100, height/2-100);
-   r = random(255);
-   g = random(255);
-   b = random (255);
-    fill(r, g, b);
-    
-    for(var i = 0; i < x.length; i++)
-    {
-        // rotate
-        rotate(PI/movement);
-      //  square(x[i], 50,5);
+function setup() {
+  createCanvas(displayWidth - 25, displayHeight - 140);
+  timer = second(); // Start the timer
+  textSize(32); // Change font size
+  textFont('Arial'); // Change font type
+  
+  // Initial positions for the images within canvas boundaries
+  x1 = random(imgSize, width - imgSize);
+  y1 = random(imgSize, height - imgSize);
+  x3 = random(imgSize, width - imgSize);
+  y3 = random(imgSize, height - imgSize);
+  
 
-    }
-    // print out image array
-   // for(var i = 0; i < myImages.length; i++)
-   // {
-       var number = random(myImages.length);
-    console.log(number);
-    console.log(floor(number));
-        image(myImages[floor(random(myImages.length))], 100, 100);
-            
-   // }
-    
-    // make it move
-    /*
-    if(movement > 0)
-    {
-        movement -= .01;
-    }
-    else
-    {
-        movement = 10.0;
-    }
-    */   
-
+  x2 = 0;
+  y2 = height - catSize; 
 }
 
-function timeIt()
-{
+function draw() {
+  background(120);
+  moveImages(); // Call function to move the images
 
+  fill(255, 120, 50);
+  text("Sarah Hauser", 100, 100);
+  
+  // Calculate and display the time until the next movement
+  var elapsedTime = second() - timer;
+  var timeUntilNextMove = 2 - elapsedTime; 
+  fill(255);
+  text("Next move in: " + nf(timeUntilNextMove, 1, 0) + " seconds", 100, 150);
+}
+
+function moveImages() {
+  // Move images every 2 seconds
+  if (second() - timer >= 2) {
+    timer = second(); // Reset the timer
+    moveImageWithinBounds(img1);
+    moveImageWithinBounds(img3);
+  }
+
+  image(img1, x1, y1);
+  image(img2, x2, y2, catSize, catSize); // Cat image with adjusted size
+  image(img3, x3, y3);
+}
+
+// Function to move an image within canvas boundaries
+function moveImageWithinBounds(img) {
+  var newX = img === img1 ? x1 : x3;
+  var newY = img === img1 ? y1 : y3;
+  
+  newX += random(-50, 50); // Randomly move image on x-axis
+  newY += random(-50, 50); // Randomly move image on y-axis
+  
+  // Constrain image position within canvas boundaries
+  newX = constrain(newX, imgSize, width - imgSize);
+  newY = constrain(newY, imgSize, height - imgSize);
+  
+  if (img === img1) {
+    x1 = newX;
+    y1 = newY;
+  } else {
+    x3 = newX;
+    y3 = newY;
+  }
 }
