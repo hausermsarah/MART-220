@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    position: relative; 
+    background-image: url('backgroud.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(194, 209, 227, 0.8); 
+    z-index: -1; 
+}
+
+header {
+    background-color: #4d4033; 
+    color: #fff;
+    padding: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Dropdown menu */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 100%; /* Position dropdown below the dropdown button */
+    left: 0; /* Align dropdown with the left edge of the button */
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #4d4033; 
+    color: #fff;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* Styling for specific sections */
+#origins, #consumption, #types, #map {
+    background-color: #c2d1e3; 
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 3); 
+}
+
+h1 {
+    color: #4d4033; 
+}
+
+p, ul {
+    color: #333; 
+}
+
+/* Styling for coffee types section */
+#types ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#types ul li {
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 200px;
+    margin: 0 auto; 
+}
+
+#types ul li p {
+    margin-top: 10px; 
+}
+
+#types ul li img {
+    width: 150px;
+    height: 150px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 2px solid #4d4033; 
+    margin: 0 auto; 
+}
